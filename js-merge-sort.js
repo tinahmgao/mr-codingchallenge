@@ -1,27 +1,19 @@
-// merge two small slices into sorted result one
-const merge = (leftSlice, rightSlice) => {
+// merge small piece to the final sorted result
+const merge = (left, right) => {
 
   const sortedSlice = [];
 
-  let leftIndex = 0;
-  let rightIndex = 0;
-
   // loop through each slice to sort them and then merge to a new array
-  while (leftIndex < leftSlice.length && rightIndex < rightSlice.length) {
-    const leftElement = leftSlice[leftIndex]
-    const rightElement = rightSlice[rightIndex]
-    if (leftElement < rightElement) {
-      sortedSlice.push(leftElement);
-      leftIndex++
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      sortedSlice.push(left.shift());
     }else{
-      sortedSlice.push(rightElement)
-      rightIndex++
+      sortedSlice.push(right.shift())
     }
   }
 
   //merge sorted slice and any remain element together to finish this turn of sorting
-  return [...sortedSlice, ...leftSlice.slice(leftIndex), ...rightSlice.slice(rightIndex)]
-
+  return [...sortedSlice, ...left, ...right]
 }
 
 //recursive merge sort
